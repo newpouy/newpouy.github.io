@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 
 navie코인 번역
-원문: lhartikk.github.io
+원문: [lhartikk.github.io](https://lhartikk.github.io)
 
 ## #1: 최소한의 블록체인
 
@@ -93,7 +93,7 @@ const generateNextBlock = (blockData: string) => {
 };
 {% endhighlight %}
 
-블록 저장
+# 블록 저장
 지금 우리는 javascript in memory 방식으로 블록체인을 저장할 거에요. 즉, 컴퓨터를 끄는 순간 데이터는 사라지게 될 거에요.
 {% highlight js %}
 const blockchain: Block[] = [genesisBlock];
