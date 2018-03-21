@@ -230,3 +230,5 @@ curl명령어로도 노드를 제어할 수 있어요.
 
 마무리.
 블록체인의 기본 개념을 익혔어요. 다음챕터에서 작업증명(POW, proof-of-work) 알고리즘을 알아볼게요. 챕터1의 코드는  [여기](https://github.com/lhartikk/naivecoin/tree/chapter1)에 있어요.
+
+[To chapter2]()
