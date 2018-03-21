@@ -73,7 +73,7 @@ const findBlock = (index: number, previousHash: string, timestamp: number, data:
 {% endhighlight %}
 마침내 블록이 '채굴'되면 네트워크를 통해 발송(broadcast)되야겠죠.
 
-## 난이도(difficulty)를 어떻게 결정할 것인가
+# 난이도(difficulty)를 어떻게 결정할 것인가
 우리는 이제 주어진 difficulty값을 가지고 해시값을 찾고, 그 값이 유효한지 검증할 수 있게 되었어요. 하지만 difficulty값은 어떻게 정해야 할까요? 이를 위해서는 difficulty값을 계산하는 로직이 필요하겠네요. 상수를 몇개 정의하는 걸로 시작해 보죠.
 - BLOCK_GENERATION_INTERVAL: 블록은 얼마나 자주 채굴되는가(Bitcoin의 경우 10분 간격이죠.)
 - DIFFICULTY_ADJUSTMENT_INTERVAL: 난이도difficulty는 얼마나 자주 조정되는가(Bitcoin은 2016블록마다 조정돼요.)
@@ -114,7 +114,7 @@ const getAdjustedDifficulty = (latestBlock: Block, aBlockchain: Block[]) => {
 };
 {% endhighlight %}
 
-## Timestamp validation
+# Timestamp validation
 챕터1에서 timestamp는 아무 역할도 하지 않았어요. 무슨 값이 되든 상관없었죠. 이제 이 값은 난이도difficulty 조정과 관련하여 블록의 유효성을 검증하는데 사용될 거에요. timestamp값으로 블록이 정상적인 난이도 조정을 거친 블록인지 검증하죠.
 {% highlight js %}
 const isValidTimestamp = (newBlock: Block, previousBlock: Block): boolean => {
@@ -123,7 +123,7 @@ const isValidTimestamp = (newBlock: Block, previousBlock: Block): boolean => {
 };
 {% endhighlight %}
 
-## 누적 난이도 (Cumulative diffculty)
+# 누적 난이도 (Cumulative diffculty)
 챕터1에서 '옳은 체인'은 '가장 긴 체인'이라고 했던 거 기억하시나요? 이제 이 명제는 변해야만 해요. 'difficulty가 가장 많이 누적된 체인'이 '옳은 체인'이죠. 다시 말하면 옳은 체인은 새로운 블록을 생성하기 위해 가장 많은 자원(resources)을 요구하는, 가장 오래 걸리는(hashRate*time) 체인이에요.
 
 누적 난이도는 2를 difficulty값만큼 곱한 2^을 모두 더하여 계산돼요. 해시값을 2진수로 바꿨을 때 시작부분의 0의 갯수가 diffculty값이였던 거 기억하시죠? 예를 들면 난이도5와 난이도11은 각각 2의 5승, 2의 11승 만큼의 채굴시간이 걸린다고 보는 거죠. 따라서 아래 그림에서 Chain B가 '옳은 체인'이에요.
