@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Naivecoin Korean Translate Version ##3"
-date:   2018-03-20 21:18:48 +0900
+date:   2018-03-22 21:18:48 +0900
 categories: jekyll update
 ---
 
@@ -19,7 +19,7 @@ navie코인 번역
 퍼블릭키 암호화를 위해서는 키 한 쌍이 필요해요. secret key와 public key. public key는 secret key로부터 만들어지지만 그 반대는 불가능해요. 이름에서 알 수 있듯이 public key는 누구에게나 공유될 수 있어요.
 
 메시지는 private key를 이용하여 signature를 만들 수 있고, 이 signature와 public key를 가진 누구나 그 signature가 특정 private key에 의해 만들어졌다는 걸 증명할 수 있죠.
-![Digital_signatures]({{ "/assets/Digital_signatures.png" | absolute_url
+![Digital_signatures]({{ "/assets/Digital_signatures.png" | absolute_url}})
 
 퍼블릭 키 암호화를 위해 elliptic이라는 라이브러리에 포함된 다음의 두 개의 암호화 함수를 사용하도록 하죠.
 - Hash function (SHA256) for 작업 증명과 블록의 고유성 확보
