@@ -5,4 +5,3 @@ permalink: /about/
 ---
 
 Hi. I'm curious about you.
-Contact me with newpouy@gmail.com
