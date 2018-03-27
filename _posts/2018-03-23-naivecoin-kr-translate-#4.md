@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Naivecoin Korean Translate Version ##4"
+title:  "Naivecoin Korean Translate Version #4"
 date:   2018-03-24 21:18:48 +0900
 categories: jekyll update
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Naivecoin Korean Translate Version ##3"
+title:  "Naivecoin Korean Translate Version #3"
 date:   2018-03-22 21:18:48 +0900
 categories: jekyll update
 ---
@@ -276,7 +276,7 @@ const validateCoinbaseTx = (transaction: Transaction, blockIndex: number): boole
 
 하지만 트랜잭션을 실제로 만들어 내는 것은 여전히 어려워요. 인풋과 아웃풋을 직접 만들어야 하고 프라이빗 키를 사용해서 그들에 서명을 해야하죠. 이 과정은 다음 챕터의 wallet을 배우면 달라질 거에요.
 
-아직 연결된 트랜잭션에 대해서도 살펴보지 않았어요. 블럭체인에 트랜잭션을 일으키기 위해서 채굴을 해야만 해요. 이 때 '트랜잭션 fee'라는 개념도 필요해죠. 다음챕터에서 살펴볼게요.
+아직 연결된 트랜잭션에 대해서도 살펴보지 않았어요. 블럭체인에 트랜잭션을 일으키기 위해서 채굴을 해야만 해요. 이 때 '트랜잭션 fee'라는 개념도 필요하죠. 다음챕터에서 살펴볼게요.
 
 The full code implemented in this chapter can be found here
 이번 챕터의 코드는 [여기](https://github.com/lhartikk/naivecoin/tree/chapter3)에 있어요.
