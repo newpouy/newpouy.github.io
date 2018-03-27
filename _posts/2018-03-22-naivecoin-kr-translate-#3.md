@@ -281,4 +281,4 @@ const validateCoinbaseTx = (transaction: Transaction, blockIndex: number): boole
 The full code implemented in this chapter can be found here
 이번 챕터의 코드는 [여기](https://github.com/lhartikk/naivecoin/tree/chapter3)에 있어요.
 
-[To chapter4](https://newpouy.github.io/jekyll/update/2017/07/12/chapter3.html)
+[To chapter4](https://newpouy.github.io/jekyll/update/2018/03/24/naivecoin-kr-translate-4.html)
