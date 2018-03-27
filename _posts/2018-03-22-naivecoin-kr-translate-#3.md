@@ -55,7 +55,6 @@ class TxOut {
 {% endhighlight %}
 
 ## transaction inputs
-Transaction inputs (txIn) provide the information “where” the coins are coming from. Each txIn refer to an earlier output, from which the coins are ‘unlocked’, with the signature. These unlocked coins are now ‘available’ for the txOuts. The signature gives proof that only the user, that has the private-key of the referred public-key ( =address) could have created the transaction.
 트랜잭션 인풋(txIn)은 코인이 어디로부터 왔는지에 대한 정보를 제공해요. 각각의 txIn은 이전의 output을 참조하고 서명을 통해 unlocked되요. 서명의 역할은 오직 public key과 한 쌍인 private key를 가진 사용자만이 트랜잭션을 만들수 있음을 보증하죠.
 {% highlight js %}
 class TxIn {
@@ -147,9 +146,7 @@ let unspentTxOuts: UnspentTxOut[] = [];
 
 ## Updating unspent transaction outputs
 새로운 블록이 더해질 때마다 uTxO(Unspent transaction outputs)을 업데이트해야해요.
-This is because the new transactions will spend some of the existing transaction outputs and introduce new unspent outputs.
 새로운 트랜잭션은 기존의 트랜잭션 아웃풋 목록에 영향을 주고 새로운 아웃풋을 발생시키기 때문이죠.
-To handle this, we will first retrieve all new unspent transaction outputs (newUnspentTxOuts) from the new block:
 이를 위해 새로 생성된 블록으로부터 new unspent transaction outputs을 순회하는 작업이 이루어질 거에요. 코드를 보죠.
 {% highlight js %}
 const newUnspentTxOuts: UnspentTxOut[] = newTransactions
@@ -159,7 +156,6 @@ const newUnspentTxOuts: UnspentTxOut[] = newTransactions
     .reduce((a, b) => a.concat(b), []);
 {% endhighlight %}
 
-We will also need to know which transaction outputs are consumed by the new transactions of the block (consumedTxOuts). This will be solved by examining the inputs of the new transactions:
 블록에서 이미 소비된 트랜잭션 아웃풋들에 대해서도 알아야 해요. 새 트랜잭션의 인풋을 검사하면 알 수 있어요.
 {% highlight js %}
 const consumedTxOuts: UnspentTxOut[] = newTransactions
@@ -168,7 +164,6 @@ const consumedTxOuts: UnspentTxOut[] = newTransactions
        .map((txIn) => new UnspentTxOut(txIn.txOutId, txIn.txOutIndex, '', 0));
 {% endhighlight %}
 
-Finally, we can generate the new unspent transaction outputs by removing the consumedTxOuts and adding the newUnspentTxOuts to our existing transaction outputs.
 이미 소비된 아웃풋을 제거하고 이제 새로은 트랜잭션 아웃풋을 만들수 있게 되었어요.
 {% highlight js %}
 const resultingUnspentTxOuts = aUnspentTxOuts
@@ -176,7 +171,6 @@ const resultingUnspentTxOuts = aUnspentTxOuts
         .concat(newUnspentTxOuts);
 {% endhighlight %}
 
-The described code and functionality is contained in the updateUnspentTxOuts method. It should be noted that this method is called only after the transactions in the block (and the block itself) has been validated.
 updateUnspentTxOuts함수가 이 작업들을 총괄 수행할 거에요. 그리고 이 함수는 반드시 트랜잭션의 유효성이 검증된 이후에 수행되어야 해요.
 
 ## Transactions validation 트랜잭션 유효성 검증
@@ -196,7 +190,6 @@ const isValidTransactionStructure = (transaction: Transaction) => {
 {% endhighlight %}
 
 # Valid transaction 유효한 트랜잭션 ID
-The id in the transaction must be correctly calculated.
 ID도 확인해야 하고.
 {% highlight js %}
 if (getTransactionId(transaction) !== transaction.id) {
@@ -206,7 +199,6 @@ if (getTransactionId(transaction) !== transaction.id) {
 {% endhighlight %}
 
 # Valid txIns
-The signatures in the txIns must be valid and the referenced outputs must have not been spent.
 txIns의 서명도 사용되지 않은 아웃풋을 잘 참조하고 있는지 확인해야 해요.
 {% highlight js %}
 const validateTxIn = (txIn: TxIn, transaction: Transaction, aUnspentTxOuts: UnspentTxOut[]): boolean => {
@@ -224,7 +216,6 @@ const validateTxIn = (txIn: TxIn, transaction: Transaction, aUnspentTxOuts: Unsp
 {% endhighlight %}
 
 # Valid txOut values
-The sums of the values specified in the outputs must be equal to the sums of the values specified in the inputs. If you refer to an output that contains 50 coins, the sum of the values in the new outputs must also be 50 coins.
 아웃풋의 코인 갯수와 인풋의 코인 갯수도 같아야만 해요. 아웃풋이 50개라면 인풋도 50개.
 {% highlight js %}
 const totalTxInValues: number = transaction.txIns
@@ -242,22 +233,17 @@ if (totalTxOutValues !== totalTxInValues) {
 {% endhighlight %}
 
 ## Coinbase transaction
-Transaction inputs must always refer to unspent transaction outputs, but from where does the initial coins come in to the blockchain? To solve this, a special type of transaction is introduced: coinbase transaction
 트랜잭션 인풋은 항상 unspent transaction outputs을 참조해야만 해요. 하지만 최초의 코인은 어디를 참조해야 할까요? 이를 해결하기 위해 coinbase transaction이 필요해요.
 
-The coinbase transaction contains only an output, but no inputs. This means that a coinbase transaction adds new coins to circulation. We specify the amount of the coinbase output to be 50 coins.
 코인베이스 트랜잭션(coinbase transaction)은 오직 아웃풋만 포함해요. 인풋은 없죠. 코인베이스 트랜잭션이 새로운 코인을 돌게 만드는 펌프?같은 역할을 할거에요. 코인베이스 아풋풋의 양을 50코인으로 정하죠.
 {% highlight js %}
 const COINBASE_AMOUNT: number = 50;
 {% endhighlight %}
 
-The coinbase transaction is always the first transaction in the block and it is included by the miner of the block. The coinbase reward acts as an incentive for the miners: if you find the block, you are able to collect 50 coins.
-코인베이스 트랜잭션은 당연히 블럭의 첫 트랜잭션이고 블럭 채굴자 정보를 포함하죠. 블락을 발견한 댓가로 채굴자는 첫 코인베이스 트랜잭션의 아웃풋으로 코인 50개를 받을 거에요.
+코인베이스 트랜잭션은 당연히 노드의 첫 트랜잭션이고 블럭 채굴자 정보를 포함하죠. 블락을 발견한 댓가로 채굴자는 첫 코인베이스 트랜잭션의 아웃풋으로 코인 50개를 받을 거에요.
 
-We will add the block height to input of the coinbase transaction. This is to ensure that each coinbase transaction has a unique txId. Without this rule, for instance, a coinbase transaction stating “give 50 coins to address 0xabc” would always have the same txId.
 코인베이스 트랜잭션의 인풋에는 block의 height값을 넣을게요. 이 값이 코인베이스 트랜잭션의 고유한 ID값 역할을 할 거에요. 이 고유값이 없다면 코인 베이스 트랜잭션은 항상 같은 주소에 50코인을 발행하게 되죠.
 
-The validation of the coinbase transaction differs slightly from the validation of a “normal” transaction
 코인베이스 트랜잭션의 유효성검증은 다른 트랜잭션이랑은 조금 다를 거에요.
 {% highlight js %}
 const validateCoinbaseTx = (transaction: Transaction, blockIndex: number): boolean => {
@@ -286,13 +272,10 @@ const validateCoinbaseTx = (transaction: Transaction, blockIndex: number): boole
 {% endhighlight %}
 
 ## Conclusions
-We included the concept of transactions to the blockchain. The basic idea is quite simple: we refer to unspent outputs in transaction inputs and use signatures to show that the unlocking part is valid. We then use outputs to “relock” them to a receiver address.
 이 챕터에서 우리는 블럭채인의 트랜잭션에 대해 알아봤어요. 기본개념은 심플해요. 사용되지 않은 트랜잭션 아웃붓과 블럭채인의 잠금해제된 부분이 유효하다는 걸 보여줄거에요.
 
-However, creating transactions is still very difficult. We must manually create the inputs and outputs of the transactions and sign them using our private keys. This will change when we introduce wallets in the next chapter.
 하지만 트랜잭션을 실제로 만들어 내는 것은 여전히 어려워요. 인풋과 아웃풋을 직접 만들어야 하고 프라이빗 키를 사용해서 그들에 서명을 해야하죠. 이 과정은 다음 챕터의 wallet을 배우면 달라질 거에요.
 
-There is also no transaction relaying yet: to include a transaction to the blockchain, you must mine it yourself. This is also the reason we did not yet introduce the concept of transaction fee.
 아직 연결된 트랜잭션에 대해서도 살펴보지 않았어요. 블럭체인에 트랜잭션을 일으키기 위해서 채굴을 해야만 해요. 이 때 '트랜잭션 fee'라는 개념도 필요해죠. 다음챕터에서 살펴볼게요.
 
 The full code implemented in this chapter can be found here

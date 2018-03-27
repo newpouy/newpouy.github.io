@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Naivecoin Korean Translate Version"
+title:  "Naivecoin Korean Translate Version #1"
 date:   2018-03-19 21:18:48 +0900
 categories: jekyll update
 ---
@@ -133,7 +133,7 @@ const isValidBlockStructure = (block: Block): boolean => {
 };
 {% endhighlight %}
 
-이제 우리는 전체 블록체인을 검사할 수 있게 되었어요. 먼저 ‘최초의 블록’을 검사하고 나서, 이어지는 모든 블록을 검사할 거에요, 다음의 코드를 통해서.
+이제 우리는 전체 블록체인을 검사할 수 있게 되었어요. 다음의 코드를 통해서, 먼저 ‘최초의 블록’을 검사하고 나서, 이어지는 모든 블록을 검사할 거에요
 {% highlight js %}
 const isValidChain = (blockchainToValidate: Block[]): boolean => {
     const isValidGenesis = (block: Block): boolean => {
@@ -158,9 +158,8 @@ const isValidChain = (blockchainToValidate: Block[]): boolean => {
 특정 시점에 ’옳은’ 체인은 하나만 존재해야만 해요. (모든 블록이 정상적이라는 전제 아래) 일단 가장 긴 체인을 ‘옳은’ 체인으로 간주할게요. 왜냐하면 모든 체인은 (이상적으로는) 동일해야 하고, 체인이 길다는 것은 다른 노드가 ‘아직’ 받지 못한 블록을 가지고 있다고 볼 수 있기 때문이죠. 언젠가는 모든 노드가 그 블록을 받아야 할 거에요.
 그림.
 ![conflict_resolving]({{ "/assets/conflict_resolving.png" | absolute_url}})
-conflict_resolving
 그래서 이런 로직을 가진 코드를 작성할게요.
-코드9.
+
 {% highlight js %}
 const replaceChain = (newBlocks: Block[]) => {
     if (isValidChain(newBlocks) && newBlocks.length > getBlockchain().length) {
@@ -223,12 +222,12 @@ curl명령어로도 노드를 제어할 수 있어요.
 > curl http://localhost:3001/blocks
 {% endhighlight %}
 
-전체구조.
+# 전체구조.
 노드는 두 개의 웹서버와 통신할 거에요. 하나는 사용자가 노드를 제어하기 위한 HTTP서버. 다른 하나는 다른 노드들과 통신하기 위한 웹소켓HTTP서버.
 
 ![naivechain_architecture]({{ "/assets/naivechain_architecture.png" | absolute_url}})
 
-마무리.
+# 마무리.
 블록체인의 기본 개념을 익혔어요. 다음챕터에서 작업증명(POW, proof-of-work) 알고리즘을 알아볼게요. 챕터1의 코드는  [여기](https://github.com/lhartikk/naivecoin/tree/chapter1)에 있어요.
 
-[To chapter2]()
+[To chapter2](https://newpouy.github.io/jekyll/update/2018/03/20/naivecoin-kr-translate-2.html)

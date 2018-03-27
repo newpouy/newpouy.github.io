@@ -87,7 +87,7 @@ const BLOCK_GENERATION_INTERVAL: number = 10;
 const DIFFICULTY_ADJUSTMENT_INTERVAL: number = 10;
 {% endhighlight %}
 
-이제 블록채굴의 난이도를 조정할 도구를 갖게 되었어요. 우리는 10블록마다 현재의 채굴 간격이 예상시간보다 낮거나 높은지 체크할 거에요. 예상시간은 BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL 으로 계산하면 돼요. <<<<예상시간은 해시값을 찾아내는 비율이 현재의 난이도와 일치할 때~~~>>>>
+이제 블록채굴의 난이도를 조정할 도구를 갖게 되었어요. 우리는 10블록마다 현재의 채굴 간격이 예상시간보다 낮거나 높은지 체크할 거에요. 예상시간은 BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL 으로 계산하면 돼요. 예상시간은 '해시값 획득률'이 '난이도'와 정확히 맞아 떨어지는 경우에 산출되는 값이죠.
 
 만약 예상시간보다 실제 걸리는 시간이 두 배 이상 크거나 작다면 우리는 difficulty값을 조정함으로써 예상시간에 가까이 가고자 노력할 거에요. 이렇게 난이노difficulty조정은 이루어지죠. 즉 채굴간격을 유지하기 위해 difficulty값을 조정하는 거죠. 코드로 확인해보아요.
 {% highlight js %}
@@ -138,4 +138,4 @@ const isValidTimestamp = (newBlock: Block, previousBlock: Block): boolean => {
 
 이번 챕터의 코드는 [여기](https://github.com/lhartikk/naivecoin/tree/chapter2)에 있어요.
 
-[To chapter3](https://lhartikk.github.io/jekyll/update/2017/07/12/chapter3.html)
+[To chapter3](https://newpouy.github.io/jekyll/update/2018/03/22/naivecoin-kr-translate-3.html)
