@@ -20,4 +20,4 @@ navie코인 번역
 
 # [#5 트랜잭션 연계](https://newpouy.github.io/jekyll/update/2018/03/24/naivecoin-kr-translate-5.html)
 
-#6 [#6 웹UI](https://newpouy.github.io/jekyll/update/2018/03/25/naivecoin-kr-translate-6.html)
+# [#6 웹UI](https://newpouy.github.io/jekyll/update/2018/03/25/naivecoin-kr-translate-6.html)
